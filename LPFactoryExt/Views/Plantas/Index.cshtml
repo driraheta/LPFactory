@@ -1,0 +1,38 @@
+﻿@using LPFactory.Utils
+
+<h2>Plantas</h2>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "GridPlantas";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Plantas")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main())
+      .Columns(
+          new Column { Bind = "Codigo" },
+          new Column { Bind = "Nombre" },
+          new Column { Bind = "Activo", Width = 90 },
+          new Column { Bind = "Direccion" },
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+      .Url(Url.Action("GetItems"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Persistence(Persistence.Session)
+    )
+
+
+}
+
+@section Scripts {
+    
+}

@@ -1,0 +1,22 @@
+﻿<h2>Lanzamiento de órdenes</h2>
+
+<h4>Estructura: @ViewBag.descripcion</h4>
+
+<h4>Cantidad: @ViewBag.cantidad</h4>
+
+@(Html.Awe().Grid("TreeGrid1")
+    .Url(Url.Action("GetResumen", "LanzamientoOrdenes"))
+    .Columns(
+        new Column { Bind = "Titulo", Header = "Título" },
+        new Column { Bind = "TPrep", Header = "Tº Prep.", Width = 100 },
+        new Column { Bind = "TProd", Header = "Tº Prod.", Width = 100 },
+        new Column { Bind = "TTotal", Header = "Tº Total", Width = 100 }
+    )
+    .Parameter("estructuraId", ViewBag.estructuraId)
+    .Parameter("cantidad", ViewBag.cantidad)
+
+    .Persistence(Persistence.Session)
+    .Groupable(false)
+    .Sortable(false)
+    .PageSize(10)
+    .Height(700))

@@ -1,0 +1,46 @@
+﻿@model LPFactory.Data.EstructuraFaseMaterial
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<ol class="breadcrumb p-3 bg-light rounded">
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Estructuras">Estructuras</a></li>
+    <li class="breadcrumb-item"><a href="/EstructuraFases/Index/@Model.EstructuraFase.Estructura.Id">@Model.EstructuraFase.Estructura.Articulo.CodigoYDescripcion (@Model.EstructuraFase.Estructura.Version)</a></li>
+    <li class="breadcrumb-item active">@Model.Articulo.CodigoYDescripcion</li>
+</ol>
+
+<h4>Editar material de la fase de la estructura</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="EmpresaId" value="@ViewBag.EmpresaId" />
+            <input type="hidden" asp-for="EstructuraFaseId" value="@ViewBag.EstructuraFaseId" />
+            
+            <div class="form-group">
+                <label asp-for="ArticuloId" class="control-label"></label>
+                <select asp-for="ArticuloId" class="form-control" asp-items="ViewBag.ArticuloId"></select>
+                <span asp-validation-for="ArticuloId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/EstructuraFases/Details/@ViewBag.EstructuraFaseId">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,37 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Tipos de incidencias";
+}
+
+<h1>Tipos de incidencias</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "IncidenciaTipos")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Descripcion", Header = "Descripción" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Descripcion").ClearButton())),
+          new Column { Bind = "Activo", Width = 90 },
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

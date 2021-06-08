@@ -1,0 +1,76 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Stock";
+}
+
+<h1>Stock</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Stocks")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Almacen.CodigoYDescripcion", ClientFormat = ".(Almacen)", Header = "Almacén" }
+            .Mod(o => o.Filter(valProp: "Almacen")),
+
+          new Column { Bind = "CodigoAlmacen", Header = "Código Almacén" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("CodigoAlmacen").ClearButton())),
+
+          new Column { Bind = "DescripcionAlmacen", Header = "Descripción Almacén" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("DescripcionAlmacen").ClearButton())),
+
+          new Column { Bind = "Ubicacion.Id", ClientFormat = ".(Ubicacion)", Header = "Ubicacion" }
+            .Mod(o => o.Filter(valProp: "Ubicacion")),
+
+          new Column { Bind = "DescripcionUbicacion", Header = "Descripción Ubicación" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("DescripcionUbicacion").ClearButton())),
+
+          new Column { Bind = "X", Header = "X" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("X").ClearButton())),
+
+          new Column { Bind = "Y", Header = "Y" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Y").ClearButton())),
+
+          new Column { Bind = "Z", Header = "Z" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Z").ClearButton())),
+
+          new Column { Bind = "Articulo.CodigoYDescripcion", ClientFormat = ".(Articulo)", Header = "Articulo" }
+            .Mod(o => o.Filter(valProp: "Articulo")),
+
+          new Column { Bind = "CodigoArticulo", Header = "Código Articulo" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("CodigoArticulo").ClearButton())),
+
+          new Column { Bind = "DescripcionArticulo", Header = "Descripción Articulo" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("DescripcionArticulo").ClearButton())),
+
+          new Column { Bind = "Lote", Header = "Lote" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Lote").ClearButton())),
+
+          new Column { Bind = "Referencia", Header = "Referencia" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Referencia").ClearButton())),
+
+          new Column { Bind = "Cantidad", Header = "Cantidad" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Cantidad").ClearButton())),
+
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

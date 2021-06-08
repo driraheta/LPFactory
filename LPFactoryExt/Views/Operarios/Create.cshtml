@@ -1,0 +1,20 @@
+﻿@model LPFactory.Data.Operario
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Nombre)
+        @Html.EditorFor(o => o.Entrada)
+        @Html.EditorFor(o => o.OtAbierta)
+        @Html.EditorFor(o => o.SeccionId)
+        @Html.EditorFor(o => o.HoraEntrada1)
+        @Html.EditorFor(o => o.MinutoEntrada1)
+        @Html.EditorFor(o => o.HoraSalida1)
+        @Html.EditorFor(o => o.MinutoSalida1)
+        @Html.EditorFor(o => o.HoraEntrada2)
+        @Html.EditorFor(o => o.MinutoEntrada2)
+        @Html.EditorFor(o => o.HoraSalida2)
+        @Html.EditorFor(o => o.MinutoSalida2)
+    }
+}

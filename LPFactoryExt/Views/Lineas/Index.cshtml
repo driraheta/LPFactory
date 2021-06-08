@@ -1,0 +1,45 @@
+﻿@using LPFactory.Utils
+
+<h2>L&iacute;neas</h2>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Lineas")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      //.Mod(o => o.Main())
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      //.Persistence(Persistence.Session)
+      .Columns(
+          new Column { Bind = "Codigo" }
+            .Mod(o => o.Filter("search:")),
+          new Column { Bind = "Nombre" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Nombre").ClearButton())),
+          new Column { Bind = "Activo", Width = 90 },
+          new Column { Bind = "Planta.CodigoYNombre", ClientFormat = ".(Planta)", Header = "Planta" }
+            .Mod(o => o.Filter(valProp: "Planta")),
+          new Column { Bind = "Seccion.CodigoYNombre", ClientFormat = ".(Seccion)", Header = "Seccion" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}
+
+@section Scripts {
+
+}

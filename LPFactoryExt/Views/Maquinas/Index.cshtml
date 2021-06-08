@@ -1,0 +1,55 @@
+﻿@using LPFactory.Utils
+
+<h2>M&aacute;quinas</h2>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Maquinas")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      //.Mod(o => o.Main())
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      //.Persistence(Persistence.Session)
+      .Columns(
+          new Column { Bind = "Codigo", Header = "Código" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Codigo").ClearButton())),
+          new Column { Bind = "Descripcion", Header = "Descripción" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Descripcion").ClearButton())),
+          new Column { Bind = "Modelo", Header = "Modelo" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Modelo").ClearButton())),
+          new Column { Bind = "NumeroSerie", Header = "Número serie" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("NumeroSerie").ClearButton())),
+          new Column { Bind = "AnioFabricacion", Header = "Año fabricación" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("AnioFabricacion").ClearButton())),
+          new Column { Bind = "Version", Header = "Versión" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Version").ClearButton())),
+          new Column { Bind = "Actividad", Header = "Actividad" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Actividad").ClearButton())),
+          new Column { Bind = "Activo", Width = 90 },
+          new Column { Bind = "Seccion.CodigoYNombre", ClientFormat = ".(Seccion)", Header = "Sección" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+          new Column { Bind = "Linea.CodigoYNombre", ClientFormat = ".(Linea)", Header = "Línea" }
+            .Mod(o => o.Filter(valProp: "Linea")),
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}
+
+@section Scripts {
+
+}

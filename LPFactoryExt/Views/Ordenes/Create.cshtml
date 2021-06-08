@@ -1,0 +1,23 @@
+﻿@model LPFactory.Data.Orden
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.ArticuloId)
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.Fecha)
+        @Html.EditorFor(o => o.Prioridad)
+        @Html.EditorFor(o => o.Cantidad)
+        @Html.EditorFor(o => o.MermasTeoricas)
+        @Html.EditorFor(o => o.MermasReales)
+        @Html.EditorFor(o => o.UbicacionDestinoId)
+        @Html.EditorFor(o => o.Producido)
+        @Html.EditorFor(o => o.Pendiente)
+        @Html.EditorFor(o => o.Estado)
+        @Html.EditorFor(o => o.FechaInicio)
+        @Html.EditorFor(o => o.FechaFin)
+        @Html.EditorFor(o => o.Observaciones)
+        @Html.EditorFor(o => o.Lote)
+    }
+}

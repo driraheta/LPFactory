@@ -1,0 +1,11 @@
+﻿@model LPFactory.Data.Operacion
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.Actividad)
+        @Html.EditorFor(o => o.Activo)
+    }
+}

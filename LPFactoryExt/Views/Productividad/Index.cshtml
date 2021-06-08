@@ -1,0 +1,387 @@
+﻿@model LPFactory.Models.ProductividadViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="card">
+    <div class="card-body">
+        <a href="#" class="card-link float-right" onclick="document.getElementById('forma').submit();">Refrescar</a>
+        <ul class="nav nav-tabs">
+            <li class="nav-item mr-1"><a href="#filtros" class="nav-link active" data-toggle="tab">Filtros</a></li>
+            <li class="nav-item mr-1"><a href="#profile" class="nav-link" data-toggle="tab">Agrupamientos</a></li>
+            <li class="nav-item mr-1"><a href="#resultados" class="nav-link" data-toggle="tab">Resultados</a></li>
+            <li class="nav-item mr-1"><a href="#profile" class="nav-link" data-toggle="tab">Gráficos</a></li>
+            <li class="nav-item mr-1"><a href="#datos" class="nav-link" data-toggle="tab">Datos</a></li>
+        </ul>
+        <div class="tab-content pt-3">
+            <div class="tab-pane fade show active" id="filtros">
+                <div class="row">
+                    <div class="col-12">
+                        <form id="forma" asp-controller="Productividad" asp-action="buscar" method="post">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr class="d-flex">
+                                        <td style="width:7%"></td>
+                                        <td style="width:13%">Desde</td>
+                                        <td style="width:13%">Hasta</td>
+                                        <td style="width:7%"></td>
+                                        <td style="width:13%">Desde</td>
+                                        <td style="width:13%">Hasta</td>
+                                        <td style="width:7%"></td>
+                                        <td style="width:13%">Desde</td>
+                                        <td style="width:13%">Hasta</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="d-flex">
+                                        <td style="width:7%">Fecha</td>
+                                        <td style="width:13%"><input asp-for="FechaDesde" type="date" class="form-control  form-control-sm" /></td>
+                                        <td style="width:13%"><input asp-for="FechaHasta" type="date" class="form-control  form-control-sm" /></td>
+                                        <td style="width:7%">Fecha Anterior</td>
+                                        <td style="width:13%"><input asp-for="FechaDesdeAnterior" type="date" class="form-control  form-control-sm" /></td>
+                                        <td style="width:13%"><input asp-for="FechaHastaAnterior" type="date" class="form-control  form-control-sm" /></td>
+                                        <td style="width:7%">Sección</td>
+                                        <td style="width:13%"><select asp-for="SeccionDesde" class="form-control" asp-items="@(new SelectList(Model.Secciones, "Codigo", "CodigoYDescripcion"))"><option>Desde</option></select></td>
+                                        <td style="width:13%"><select asp-for="SeccionHasta" class="form-control" asp-items="@(new SelectList(Model.Secciones, "Codigo", "CodigoYDescripcion"))"><option>Hasta</option></select></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <td style="width:7%">Máquina</td>
+                                        <td style="width:13%"><select asp-for="MaquinaDesde" class="form-control" asp-items="@(new SelectList(Model.Maquinas, "Codigo", "CodigoYDescripcion"))"><option>Desde</option></select></td>
+                                        <td style="width:13%"><select asp-for="MaquinaHasta" class="form-control" asp-items="@(new SelectList(Model.Maquinas, "Codigo", "CodigoYDescripcion"))"><option>Hasta</option></select></td>
+                                        <td style="width:7%">Operario</td>
+                                        <td style="width:13%"><select asp-for="OperarioIdDesde" class="form-control" asp-items="@(new SelectList(Model.Operarios, "Codigo", "CodigoYDescripcion"))"><option>Desde</option></select></td>
+                                        <td style="width:13%"><select asp-for="OperarioIdHasta" class="form-control" asp-items="@(new SelectList(Model.Operarios, "Codigo", "CodigoYDescripcion"))"><option>Hasta</option></select></td>
+                                        <td style="width:7%">Fase</td>
+                                        <td style="width:13%"><select asp-for="FaseDesde" class="form-control" asp-items="@(new SelectList(Model.Fases, "Codigo", "CodigoYDescripcion"))"><option>Desde</option></select></td>
+                                        <td style="width:13%"><select asp-for="FaseHasta" class="form-control" asp-items="@(new SelectList(Model.Fases, "Codigo", "CodigoYDescripcion"))"><option>Hasta</option></select></td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <td style="width:7%">Orden</td>
+                                        <td style="width:13%"><select asp-for="OrdenDesde" class="form-control" asp-items="@(new SelectList(Model.Ordenes, "Codigo", "CodigoYDescripcion"))"><option>Desde</option></select></td>
+                                        <td style="width:13%"><select asp-for="OrdenHasta" class="form-control" asp-items="@(new SelectList(Model.Ordenes, "Codigo", "CodigoYDescripcion"))"><option>Hasta</option></select></td>
+                                        <td style="width:7%">Artículo</td>
+                                        <td style="width:26%" colspan="2"><select asp-for="ArticuloId" class="form-control" asp-items="@(new SelectList(Model.Articulos, "Codigo", "CodigoYDescripcion"))"><option>Todos</option></select></td>
+                                        <td style="width:7%">Planta</td>
+                                        <td style="width:26%" colspan="2">
+                                            <select class="selectpicker form-control form-control-sm" data-style="btn-default">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="d-flex">
+                                        <td style="width:7%">Estado</td>
+                                        <td style="width:26%" colspan="2">
+                                            <select class="selectpicker form-control form-control-sm" data-style="btn-default">
+                                                <option>0</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                            </select>
+                                        </td>
+                                        <td style="width:7%">Familia</td>
+                                        <td style="width:26%" colspan="2"><select asp-for="FamiliaId" class="form-control" asp-items="@(new SelectList(Model.ArticuloFamilias, "Codigo", "CodigoYDescripcion"))"><option>Todos</option></select></td>
+                                        <td style="width:7%">Línea</td>
+                                        <td style="width:13%"><input asp-for="LineaDesde" class="form-control  form-control-sm" /></td>
+                                        <td style="width:13%"><input asp-for="LineaHasta" class="form-control  form-control-sm" /></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Variables</th>
+                                    <th>Teórico</th>
+                                    <th>Real</th>
+                                    <th>Real Ant</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Producción</th>
+                                    <td>@Model.Produccion?.Teorico</td>
+                                    <td>@Model.Produccion?.Real</td>
+                                    <td>@Model.Produccion?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Mermas</th>
+                                    <td>@Model.Mermas?.Teorico</td>
+                                    <td>@Model.Mermas?.Real</td>
+                                    <td>@Model.Mermas?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Tiempo preparación</th>
+                                    <td>@Model.TiempoPreparacion?.Teorico</td>
+                                    <td>@Model.TiempoPreparacion?.Real</td>
+                                    <td>@Model.TiempoPreparacion?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Tiempo producción</th>
+                                    <td>@Model.TiempoProduccion?.Teorico</td>
+                                    <td>@Model.TiempoProduccion?.Real</td>
+                                    <td>@Model.TiempoProduccion?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Nº incidencias</th>
+                                    <td>@Model.NumeroIncidencias?.Teorico</td>
+                                    <td>@Model.NumeroIncidencias?.Real</td>
+                                    <td>@Model.NumeroIncidencias?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Tiempo incidencias</th>
+                                    <td>@Model.TiempoIncidencias?.Teorico</td>
+                                    <td>@Model.TiempoIncidencias?.Real</td>
+                                    <td>@Model.TiempoIncidencias?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Nº microparadas</th>
+                                    <td>@Model.NumeroMicroparadas?.Teorico</td>
+                                    <td>@Model.NumeroMicroparadas?.Real</td>
+                                    <td>@Model.NumeroMicroparadas?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Tiempo microparadas</th>
+                                    <td>@Model.TiempoMicroparadas?.Teorico</td>
+                                    <td>@Model.TiempoMicroparadas?.Real</td>
+                                    <td>@Model.TiempoMicroparadas?.RealAnt</td>
+                                </tr>
+                                <tr>
+                                    <th>Disponibilidad</th>
+                                    <td>@Model.Disponibilidad?.Teorico.ToString("P")</td>
+                                    <td>@Model.Disponibilidad?.Real.ToString("P")</td>
+                                    <td>@Model.Disponibilidad?.RealAnt.ToString("P")</td>
+                                </tr>
+                                <tr>
+                                    <th>Rendimiento</th>
+                                    <td>@Model.Rendimiento?.Teorico.ToString("P")</td>
+                                    <td>@Model.Rendimiento?.Real.ToString("P")</td>
+                                    <td>@Model.Rendimiento?.RealAnt.ToString("P")</td>
+                                </tr>
+                                <tr>
+                                    <th>Calidad</th>
+                                    <td>@Model.Calidad?.Teorico.ToString("P")</td>
+                                    <td>@Model.Calidad?.Real.ToString("P")</td>
+                                    <td>@Model.Calidad?.RealAnt.ToString("P")</td>
+                                </tr>
+                                <tr>
+                                    <th>OEE</th>
+                                    <td>-</td>
+                                    <td>@Model.OEE?.Real.ToString("P")</td>
+                                    <td>@Model.OEE?.RealAnt.ToString("P")</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Orden</th>
+                                <th>Articulo</th>
+                                <th>Descripción</th>
+                                <th>Cantidad</th>
+                                <th>Producido</th>
+                                <th>T. Prep. T</th>
+                                <th>T. Prep. R</th>
+                                <th>T. Prod. T</th>
+                                <th>T. Prod. R</th>
+                                <th>Mermas</th>
+                            </tr>
+                        </thead>
+                        @foreach (var l in Model.LineasDatos)
+                        {
+                            <tr>
+                                <td>@l.Orden</td>
+                                <td>@l.Articulo</td>
+                                <td>@l.Descripcion</td>
+                                <td>@l.Cantidad</td>
+                                <td>@l.Producido</td>
+                                <td>@l.TiempoPreparacionTeorico</td>
+                                <td>@l.TiempoPreparacionReal</td>
+                                <td>@l.TiempoProduccionTeorico</td>
+                                <td>@l.TiempoProduccionReal</td>
+                                <td>@l.Mermas</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile">...</div>
+
+
+            <div class="tab-pane fade" id="resultados">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Variables</th>
+                            <th>Teórico</th>
+                            <th>Real</th>
+                            <th>Real Ant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Producción</th>
+                            <td>@Model.Produccion?.Teorico</td>
+                            <td>@Model.Produccion?.Real</td>
+                            <td>@Model.Produccion?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Mermas</th>
+                            <td>@Model.Mermas?.Teorico</td>
+                            <td>@Model.Mermas?.Real</td>
+                            <td>@Model.Mermas?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Tiempo preparación</th>
+                            <td>@Model.TiempoPreparacion?.Teorico</td>
+                            <td>@Model.TiempoPreparacion?.Real</td>
+                            <td>@Model.TiempoPreparacion?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Tiempo producción</th>
+                            <td>@Model.TiempoProduccion?.Teorico</td>
+                            <td>@Model.TiempoProduccion?.Real</td>
+                            <td>@Model.TiempoProduccion?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Nº incidencias</th>
+                            <td>@Model.NumeroIncidencias?.Teorico</td>
+                            <td>@Model.NumeroIncidencias?.Real</td>
+                            <td>@Model.NumeroIncidencias?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Tiempo incidencias</th>
+                            <td>@Model.TiempoIncidencias?.Teorico</td>
+                            <td>@Model.TiempoIncidencias?.Real</td>
+                            <td>@Model.TiempoIncidencias?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Nº microparadas</th>
+                            <td>@Model.NumeroMicroparadas?.Teorico</td>
+                            <td>@Model.NumeroMicroparadas?.Real</td>
+                            <td>@Model.NumeroMicroparadas?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Tiempo microparadas</th>
+                            <td>@Model.TiempoMicroparadas?.Teorico</td>
+                            <td>@Model.TiempoMicroparadas?.Real</td>
+                            <td>@Model.TiempoMicroparadas?.RealAnt</td>
+                        </tr>
+                        <tr>
+                            <th>Disponibilidad</th>
+                            <td>@Model.Disponibilidad?.Teorico.ToString("P")</td>
+                            <td>@Model.Disponibilidad?.Real.ToString("P")</td>
+                            <td>@Model.Disponibilidad?.RealAnt.ToString("P")</td>
+                        </tr>
+                        <tr>
+                            <th>Rendimiento</th>
+                            <td>@Model.Rendimiento?.Teorico.ToString("P")</td>
+                            <td>@Model.Rendimiento?.Real.ToString("P")</td>
+                            <td>@Model.Rendimiento?.RealAnt.ToString("P")</td>
+                        </tr>
+                        <tr>
+                            <th>Calidad</th>
+                            <td>@Model.Calidad?.Teorico.ToString("P")</td>
+                            <td>@Model.Calidad?.Real.ToString("P")</td>
+                            <td>@Model.Calidad?.RealAnt.ToString("P")</td>
+                        </tr>
+                        <tr>
+                            <th>OEE</th>
+                            <td>-</td>
+                            <td>@Model.OEE?.Real.ToString("P")</td>
+                            <td>@Model.OEE?.RealAnt.ToString("P")</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="tab-pane fade" id="datos">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Orden</th>
+                            <th>Articulo</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Producido</th>
+                            <th>T. Prep. T</th>
+                            <th>T. Prep. R</th>
+                            <th>T. Prod. T</th>
+                            <th>T. Prod. R</th>
+                            <th>Mermas</th>
+                        </tr>
+                    </thead>
+                    @foreach (var l in Model.LineasDatos)
+                    {
+                        <tr>
+                            <td>@l.Orden</td>
+                            <td>@l.Articulo</td>
+                            <td>@l.Descripcion</td>
+                            <td>@l.Cantidad</td>
+                            <td>@l.Producido</td>
+                            <td>@l.TiempoPreparacionTeorico</td>
+                            <td>@l.TiempoPreparacionReal</td>
+                            <td>@l.TiempoProduccionTeorico</td>
+                            <td>@l.TiempoProduccionReal</td>
+                            <td>@l.Mermas</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- required js -->
+    <script src="~/lib/chart.js/dist/Chart.min.js" /></script>
+
+    <!-- script -->
+    <script>
+        var ctx2 = document.getElementById('barChart');
+        var barChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Disponibilidad', 'Rendimiento'],
+                datasets: [{
+                    label: 'Anterior',
+                    data: [
+                        @Model.DisponibilidadAnterior,
+                        @Model.RendimientoAnterior
+                    ],
+                    backgroundColor: hexToRgba(COLOR_BLUE, .2),
+                    borderColor: COLOR_BLUE,
+                    borderWidth: 1.5
+                }, {
+                    label: 'Actual',
+                    data: [
+                        @Model.DisponibilidadActual,
+                        @Model.RendimientoActual
+                    ],
+                    backgroundColor: hexToRgba(COLOR_GRAY_500, .2),
+                    borderColor: COLOR_GRAY_500,
+                    borderWidth: 1.5
+                }]
+            }
+        });
+    </script>
+}

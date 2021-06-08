@@ -1,0 +1,13 @@
+﻿@model LPFactory.Data.Puesto
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Nombre)
+        @Html.EditorFor(o => o.Activo)
+        @Html.EditorFor(o => o.SeccionId)
+        @Html.EditorFor(o => o.LineaId)
+        @Html.EditorFor(o => o.MaquinaId)
+    }
+}

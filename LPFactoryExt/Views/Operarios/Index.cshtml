@@ -1,0 +1,50 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Operarios";
+}
+
+<h1>Operarios</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Operarios")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Codigo", Header = "Código" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Codigo").ClearButton())),
+          new Column { Bind = "Nombre", Header = "Nombre" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Nombre").ClearButton())),
+          new Column { Bind = "Entrada", Width = 90 },
+          new Column { Bind = "OtAbierta", Header= "Ot. Abierta", Width = 90 },
+          new Column { Bind = "Seccion.CodigoYNombre", ClientFormat = ".(Seccion)", Header = "Sección" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+          new Column { Bind = "HoraEntrada1", Header= "Hora Entrada 1", Width = 90 },
+          new Column { Bind = "MinutoEntrada1", Header= "Minuto Entrada 1", Width = 90 },
+          new Column { Bind = "HoraSalida1", Header= "Hora Salida 1", Width = 90 },
+          new Column { Bind = "MinutoSalida1", Header= "Minuto Salida 1", Width = 90 },
+          new Column { Bind = "HoraEntrada2", Header= "Hora Entrada 2", Width = 90 },
+          new Column { Bind = "MinutoEntrada2", Header= "Minuto Entrada 2", Width = 90 },
+          new Column { Bind = "HoraSalida2", Header= "Hora Salida 2", Width = 90 },
+          new Column { Bind = "MinutoSalida2", Header= "Minuto Salida 2", Width = 90 },
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

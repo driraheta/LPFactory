@@ -1,0 +1,80 @@
+﻿@model LPFactory.Models.EscandalloViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<div>
+    <h4>EscandalloViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Factor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Factor)
+        </dd>
+    </dl>
+</div>
+
+
+<div>
+    <div>
+        <div class="col-md-12">
+            @foreach (var fase in Model.Estructura.Fases)
+            {
+                <div class="card">
+                    <div class="card-header">Fase @fase.Fase.CodigoYDescripcion</div>
+                    <div class="card-body">
+                        <h4>Materiales</h4>
+                        <table class="table table-sm table-borderless">
+                            <tr class="table-active">
+                                <td>Art&iacute;culo</td>
+                                <td>Cantidad</td>
+                            </tr>
+                            @foreach (var item in fase.Materiales.OrderBy(x => x.Articulo.CodigoYDescripcion))
+                            {
+                                <tr class="Light">
+                                    <td>@item.Articulo.CodigoYDescripcion</td>
+                                    <td class="text-right">@item.Cantidad</td>
+                                </tr>
+                            }
+                        </table>
+
+                        <h4>Operaciones</h4>
+                        <table class="table table-sm table-borderless">
+                            <tr class="table-active">
+                                <td>Operaci&oacute;n</td>
+                                <td>M&aacute;quina</td>
+                                <td>Tº Prep.</td>
+                                <td>Tº Prod.</td>
+                                <td>Mermas</td>
+                                <td></td>
+                            </tr>
+                            @foreach (var item in fase.Operaciones.OrderBy(x => x.Operacion.CodigoYDescripcion))
+                            {
+                                <tr class="Light">
+                                    <td>@item.Operacion.CodigoYDescripcion</td>
+                                    <td>@item.Maquina.CodigoYDescripcion</td>
+                                    <td class="text-right">@item.TiempoPreparacion</td>
+                                    <td class="text-right">@item.TiempoProduccion</td>
+                                    <td class="text-right">@item.MermasTeoricas</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <br />
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

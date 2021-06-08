@@ -1,0 +1,11 @@
+﻿@model LPFactory.Data.Almacen
+
+
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Descripcion)
+    }
+}

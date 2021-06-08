@@ -1,0 +1,165 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!--<div class="text-center">-->
+    @*<h1 class="display-4">LeanProcess</h1>*@
+    <!--<a href="#" class="">
+        <img src="~/img/LPFACTORY.png" alt="" height="250" />
+    </a>
+</div>-->
+
+
+
+
+<div class="container">
+    @* Logos *@
+    <div class="row">
+        <div class="col-sm mb-3">
+            <div class="card-deck">
+                <div class="card" style="max-width: 250px">
+                    <div class="align-self-center my-auto">
+                        <img src="~/img/LPFACTORY3500.png" class="card-img" alt="" />
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-md-4 my-auto">
+                            @*<img src="~/img/logoempesa.png" alt="" class="card-img" style="max-width: 200px" />*@
+                            <img src="@ViewBag.logoImageBase64" alt="" class="card-img" style="max-width: 200px" />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.NombreEmpresa</h5>
+                                <p class="card-text">@ViewBag.DireccionEmpresa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="max-width: 250px">
+                    <div class="card-header">ERP</div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-around">
+                            <div><h5 class="card-title">@ViewBag.NombreERP</h5></div>
+                            <div><span class="badge bg-success-transparent-2 text-success" style="min-width: 60px;">Conectado</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Tarjetas de menús *@
+    <div class="row">
+        <div class="col-sm mb-3">
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">Servicios</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Empresas/Edit" class="card-link">Empresa</a></li>
+                        <li class="list-group-item"><a href="/Plantas" class="card-link">Plantas</a></li>
+                        <li class="list-group-item"><a href="/Secciones" class="card-link">Secciones</a></li>
+                        <li class="list-group-item"><a href="/Lineas" class="card-link">Líneas</a></li>
+                        <li class="list-group-item"><a href="/Maquinas" class="card-link">Máquinas</a></li>
+                        <li class="list-group-item"><a href="/Puestos" class="card-link">Puestos</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Maestros</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Articulos" class="card-link">Artículos</a></li>
+                        <li class="list-group-item"><a href="/ArticuloFamilias" class="card-link">Familias de artículos</a></li>
+                        <li class="list-group-item"><a href="/Fases" class="card-link">Fases</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">RR.HH.</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Operarios" class="card-link">Operarios</a></li>
+                        <li class="list-group-item"><a href="/Calendario" class="card-link">Calendario</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Logística</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Almacenes" class="card-link">Almacenes</a></li>
+                        <li class="list-group-item"><a href="/Ubicaciones" class="card-link">Ubicaciones</a></li>
+                        <li class="list-group-item"><a href="/Stocks" class="card-link">Stock</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Producción</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/OrdenMateriales" class="card-link">Materiales</a></li>
+                        <li class="list-group-item"><a href="/OrdenOperaciones" class="card-link">Operaciones</a></li>
+                        <li class="list-group-item"><a href="/Planificacion" class="card-link">Planificación</a></li>
+                        <li class="list-group-item"><a href="/LanzamientoOrdenes" class="card-link">Lanzamiento de órdenes</a></li>
+                        <li class="list-group-item"><a href="/Ordenes" class="card-link">Órdenes</a></li>
+                        <li class="list-group-item"><a href="/Estructuras" class="card-link">Estructuras</a></li>
+                        <li class="list-group-item"><a href="/TiempoCambios" class="card-link">Tiempos de cambio</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">MRP</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Componentes" class="card-link">Componentes</a></li>
+                        <li class="list-group-item"><a href="/OrdenMateriales" class="card-link">Órdenes Materiales</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm mb-3">
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">CRP</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Operaciones" class="card-link">Operaciones</a></li>
+                        <li class="list-group-item"><a href="/OrdenOperaciones" class="card-link">Órdenes Operaciones</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Productividad</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Productividad" class="card-link">Productividad</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Incidencias</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Incidencias" class="card-link">Incidencias</a></li>
+                        <li class="list-group-item"><a href="/IncidenciaTipos" class="card-link">Tipos de incidencias</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Mantenimiento</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/MantenimientoMaquinas" class="card-link">Máquinas</a></li>
+                        <li class="list-group-item"><a href="/Intervenciones" class="card-link">Intervenciones</a></li>
+                        <li class="list-group-item"><a href="/MantenimientoOrdenes" class="card-link">Órdenes de mantenimiento</a></li>
+                        <li class="list-group-item"><a href="/Recambios" class="card-link">Recambios</a></li>
+                        <li class="list-group-item"><a href="/MantenimientosTipos" class="card-link">Tipos de mantenimientos</a></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">Herramientas LEAN</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/Lean5S" class="card-link">5S</a></li>
+                        <li class="list-group-item"><a href="/SMED" class="card-link">SMED</a></li>
+                        <li class="list-group-item"><a href="/KANBAN" class="card-link">KANBAN</a></li>
+                        <li class="list-group-item"><a href="/HOSHINKANRI" class="card-link">HOSHIN KANRI</a></li>
+                        <li class="list-group-item"><a href="/ANDON" class="card-link">ANDON</a></li>
+                        <li class="list-group-item"><a href="/TPM" class="card-link">TPM</a></li>
+                        <li class="list-group-item"><a href="/HEIJUNKA" class="card-link">HEIJUNKA</a></li>
+                        <li class="list-group-item"><a href="/TAKTTIME" class="card-link">TAKT TIME</a></li>
+                        <li class="list-group-item"><a href="/GEMBA" class="card-link">GEMBA</a></li>
+                        <li class="list-group-item"><a href="/POKA_YOKE" class="card-link">POKA-YOKE</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

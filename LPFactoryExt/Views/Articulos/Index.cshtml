@@ -1,0 +1,53 @@
+﻿@using LPFactory.Utils
+
+<h2>Art&iacute;culos</h2>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+@Html.InitCrudPopupsForGrid(gridId, "Articulos")
+
+<div class="bar">
+    @Html.CreateButtonForGrid(gridId)
+</div>
+
+@(Html.Awe().Grid(gridId)
+      //.Mod(o => o.Main())
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      //.Persistence(Persistence.Session)
+      .Columns(
+          new Column { Bind = "Codigo" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Codigo").ClearButton())),
+          new Column { Bind = "Referencia" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Referencia").ClearButton())),
+          new Column { Bind = "Descripcion" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Descripcion").ClearButton())),
+          new Column { Bind = "Activo", Width = 90 },
+          new Column { Bind = "Tipo.CodigoYDescripcion", ClientFormat = ".(Tipo)", Header = "Tipo" }
+            .Mod(o => o.Filter(valProp: "Tipo")),
+          new Column { Bind = "Familia.CodigoYDescripcion", ClientFormat = ".(Familia)", Header = "Familia" }
+            .Mod(o => o.Filter(valProp: "Familia")),
+          new Column { Bind = "Ubicacion" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Ubicacion").ClearButton())),
+          new Column { Bind = "Lote" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Lote").ClearButton())),
+          new Column { Bind = "Stock" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Stock").ClearButton())),
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}
+
+@section Scripts {
+
+}

@@ -1,0 +1,81 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Órdenes Operaciones";
+}
+
+<h1>Órdenes Operaciones</h1>
+<p>
+    <a asp-action="SubirFichero">Subir fichero de &oacute;rdenes</a>
+</p>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "OrdenOperaciones")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Orden.CodigoYDescripcion", ClientFormat = ".(Orden)", Header = "Órden" }
+            .Mod(o => o.Filter(valProp: "Orden")),
+
+          new Column { Bind = "Seccion.CodigoYDescripcion", ClientFormat = ".(Seccion)", Header = "Sección" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+
+          new Column { Bind = "Fase.CodigoYDescripcion", ClientFormat = ".(Fase)", Header = "Fase" }
+            .Mod(o => o.Filter(valProp: "Fase")),
+
+          new Column { Bind = "Operacion.CodigoYDescripcion", ClientFormat = ".(Operacion)", Header = "Operacion" }
+            .Mod(o => o.Filter(valProp: "Operacion")),
+
+          new Column { Bind = "Maquina.CodigoYDescripcion", ClientFormat = ".(Maquina)", Header = "Maquina" }
+            .Mod(o => o.Filter(valProp: "Maquina")),
+
+          new Column { Bind = "Secuencia", Width = 100 },
+
+          new Column { Bind = "Articulo.CodigoYDescripcion", ClientFormat = ".(Articulo)", Header = "Articulo" }
+            .Mod(o => o.Filter(valProp: "Articulo")),
+
+          new Column { Bind = "Descripcion", Width = 100 },
+          new Column { Bind = "TiempoProduccion", Width = 100 },
+          new Column { Bind = "TiempoPreparacion", Width = 100 },
+          new Column { Bind = "Cantidad", Width = 100 },
+          new Column { Bind = "MermasTeoricas", Width = 100 },
+
+          new Column { Bind = "Operario.CodigoYDescripcion", ClientFormat = ".(Operario)", Header = "Operario" }
+            .Mod(o => o.Filter(valProp: "Operario")),
+
+          new Column { Bind = "TiempoPreparacionReal", Width = 100 },
+          new Column { Bind = "TiempoProduccionReal", Width = 100 },
+          new Column { Bind = "CantidadProducida", Width = 100 },
+          new Column { Bind = "MermasReales", Width = 100 },
+          new Column { Bind = "TiempoIncidencias", Width = 100 },
+          new Column { Bind = "NumeroIncidencias", Width = 100 },
+          new Column { Bind = "TiempoMicroparadas", Width = 100 },
+          new Column { Bind = "NumeroMicroparadas", Width = 100 },
+          new Column { Bind = "FechaInicio", Width = 100 },
+          new Column { Bind = "FechaFin", Width = 100 },
+          new Column { Bind = "Estado", Width = 100 },
+          new Column { Bind = "Observaciones", Width = 100 },
+          new Column { Bind = "CodigoOrden", Width = 100 },
+          new Column { Bind = "CodigoArticulo", Width = 100 },
+
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

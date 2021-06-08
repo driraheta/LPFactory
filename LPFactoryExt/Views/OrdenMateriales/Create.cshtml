@@ -1,0 +1,25 @@
+﻿@model LPFactory.Data.OrdenMaterial
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.OrdenId)
+        @Html.EditorFor(o => o.SeccionId)
+        @Html.EditorFor(o => o.FaseId)
+        @Html.EditorFor(o => o.OperacionId)
+        @Html.EditorFor(o => o.Secuencia)
+        @Html.EditorFor(o => o.NumeroLinea)
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.Lote)
+        @Html.EditorFor(o => o.MaquinaId)
+        @Html.EditorFor(o => o.ArticuloId)
+        @Html.EditorFor(o => o.UbicacionOrigenId)
+        @Html.EditorFor(o => o.UbicacionDestinoId)
+        @Html.EditorFor(o => o.Cantidad)
+        @Html.EditorFor(o => o.CantidadReal)
+        @Html.EditorFor(o => o.MermasReales)
+        @Html.EditorFor(o => o.MermasTeoricas)
+        @Html.EditorFor(o => o.CodigoArticulo)
+
+    }
+}

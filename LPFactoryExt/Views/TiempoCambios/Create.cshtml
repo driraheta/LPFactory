@@ -1,0 +1,11 @@
+﻿@model LPFactory.Data.TiempoCambio
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.ArgumentoId)
+        @Html.EditorFor(o => o.ValorActualId)
+        @Html.EditorFor(o => o.ValorSiguienteId)
+        @Html.EditorFor(o => o.Tiempo)
+    }
+}

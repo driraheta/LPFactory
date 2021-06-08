@@ -1,0 +1,35 @@
+﻿@model LPFactory.Data.OrdenOperacion
+
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.OrdenId)
+        @Html.EditorFor(o => o.SeccionId)
+        @Html.EditorFor(o => o.FaseId)
+        @Html.EditorFor(o => o.OperacionId)
+        @Html.EditorFor(o => o.MaquinaId)
+        @Html.EditorFor(o => o.Secuencia)
+        @Html.EditorFor(o => o.ArticuloId)
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.TiempoPreparacion)
+        @Html.EditorFor(o => o.TiempoProduccion)
+        @Html.EditorFor(o => o.Cantidad)
+        @Html.EditorFor(o => o.MermasTeoricas)
+        @Html.EditorFor(o => o.OperarioId)
+        @Html.EditorFor(o => o.TiempoPreparacionReal)
+        @Html.EditorFor(o => o.TiempoProduccionReal)
+        @Html.EditorFor(o => o.CantidadProducida)
+        @Html.EditorFor(o => o.MermasReales)
+        @Html.EditorFor(o => o.TiempoIncidencias)
+        @Html.EditorFor(o => o.NumeroIncidencias)
+        @Html.EditorFor(o => o.TiempoMicroparadas)
+        @Html.EditorFor(o => o.NumeroMicroparadas)
+        @Html.EditorFor(o => o.FechaInicio)
+        @Html.EditorFor(o => o.FechaFin)
+        @Html.EditorFor(o => o.Estado)
+        @Html.EditorFor(o => o.Observaciones)
+        @Html.EditorFor(o => o.CodigoOrden)
+        @Html.EditorFor(o => o.CodigoArticulo)
+    }
+}

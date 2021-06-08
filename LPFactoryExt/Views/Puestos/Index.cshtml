@@ -1,0 +1,46 @@
+﻿@using LPFactory.Utils
+@*@model IEnumerable<LPFactory.Data.Puesto>*@
+
+@{
+    ViewData["Title"] = "Puestos";
+}
+
+<h1>Puestos</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Puestos")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)      
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Codigo", Header = "Código" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Codigo").ClearButton())),
+          new Column { Bind = "Nombre", Header = "Nombre" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Nombre").ClearButton())),          
+          new Column { Bind = "Activo", Width = 90 },
+          new Column { Bind = "Seccion.CodigoYNombre", ClientFormat = ".(Seccion)", Header = "Sección" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+          new Column { Bind = "Linea.CodigoYNombre", ClientFormat = ".(Linea)", Header = "Línea" }
+            .Mod(o => o.Filter(valProp: "Linea")),
+          new Column { Bind = "Maquina.CodigoYDescripcion", ClientFormat = ".(Maquina)", Header = "Maquina" }
+            .Mod(o => o.Filter(valProp: "Maquina")),
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

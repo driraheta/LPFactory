@@ -1,0 +1,11 @@
+﻿@model LPFactory.ViewModels.Input.PlantaInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Nombre)
+        @Html.EditorFor(o => o.Direccion)
+        @Html.EditorFor(o => o.Activo)
+    }
+}

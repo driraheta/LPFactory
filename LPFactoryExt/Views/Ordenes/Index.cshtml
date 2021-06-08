@@ -1,0 +1,65 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Órdenes";
+}
+
+<h1>Órdenes</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Ordenes")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Codigo", Header = "Código" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Codigo").ClearButton())),
+
+          new Column { Bind = "Articulo.CodigoYDescripcion", ClientFormat = ".(Articulo)", Header = "Articulo" }
+            .Mod(o => o.Filter(valProp: "Articulo")),
+
+          new Column { Bind = "Descripcion", Width = 120 }
+          .Mod(o => o.Filter(Html.Awe().TextBox("Descripcion").ClearButton())),
+
+          new Column { Bind = "Fecha", Width = 120 }
+          .Mod(o => o.Filter(Html.Awe().TextBox("Fecha").ClearButton())),
+
+          new Column { Bind = "Prioridad", Width = 90 },
+          new Column { Bind = "Cantidad", Width = 90 },
+          new Column { Bind = "MermasTeoricas", Header= "Mermas Teorícas", Width = 120 },
+          new Column { Bind = "MermasReales", Header = "Mermas Reales", Width = 120 },
+
+
+          new Column { Bind = "Seccion.CodigoYNombre", ClientFormat = ".(Seccion)", Header = "Sección" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+
+          new Column { Bind = "Producido", Width = 90 },
+          new Column { Bind = "Pendite", Width = 90 },
+          new Column { Bind = "Estado", Width = 110 }
+          .Mod(o => o.Filter(Html.Awe().TextBox("Estado").ClearButton())),
+          new Column { Bind = "FechaInicio", Width = 90 },
+          new Column { Bind = "FechaFin", Width = 90 },
+          new Column { Bind = "Observaciones", Width = 90 },
+          new Column { Bind = "Lote", Width = 90 }
+          .Mod(o => o.Filter(Html.Awe().TextBox("Lote").ClearButton())),
+
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

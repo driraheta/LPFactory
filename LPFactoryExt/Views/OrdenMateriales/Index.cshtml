@@ -1,0 +1,71 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Materiales";
+}
+
+<h1>Materiales</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "OrdenMateriales")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Orden.CodigoYDescripcion", ClientFormat = ".(Orden)", Header = "Órden" }
+            .Mod(o => o.Filter(valProp: "Orden")),
+
+          new Column { Bind = "Seccion.CodigoYDescripcion", ClientFormat = ".(Seccion)", Header = "Sección" }
+            .Mod(o => o.Filter(valProp: "Seccion")),
+
+          new Column { Bind = "Fase.CodigoYDescripcion", ClientFormat = ".(Fase)", Header = "Fase" }
+            .Mod(o => o.Filter(valProp: "Fase")),
+
+          new Column { Bind = "Operacion.CodigoYDescripcion", ClientFormat = ".(Operacion)", Header = "Operacion" }
+            .Mod(o => o.Filter(valProp: "Operacion")),
+
+          new Column { Bind = "Secuencia", Header="Secuencia", Width = 90 },
+          new Column { Bind = "NumeroLinea", Header="Numero Linea", Width = 90 },
+          new Column { Bind = "Descripcion", ClientFormat = ".(Descripcion)", Header = "Descripcion" }
+            .Mod(o => o.Filter(valProp: "Descripcion")),
+          new Column { Bind = "Lote", Width = 90 },
+
+          new Column { Bind = "Maquina.CodigoYDescripcion", ClientFormat = ".(Maquina)", Header = "Maquina" }
+            .Mod(o => o.Filter(valProp: "Maquina")),
+
+          new Column { Bind = "Articulo.CodigoYDescripcion", ClientFormat = ".(Articulo)", Header = "Articulo" }
+            .Mod(o => o.Filter(valProp: "Articulo")),
+
+
+          new Column { Bind = "UbicacionOrigen.Id", ClientFormat = ".(UbicacionOrigen)", Header = "Ubicacion Origen" }
+            .Mod(o => o.Filter(valProp: "UbicacionOrigen")),
+
+          new Column { Bind = "UbicacionDestino.Id", ClientFormat = ".(UbicacionDestino)", Header = "Ubicacion Destino" }
+            .Mod(o => o.Filter(valProp: "UbicacionDestino")),
+
+          new Column { Bind = "Cantidad", Header="Cantidad", Width = 120 },
+          new Column { Bind = "CantidadReal", Header="Cantidad Real", Width = 120 },
+          new Column { Bind = "MermasTeoricas", Header = "Mermas Teoricas", Width = 120 },
+          new Column { Bind = "MermasReales", Header = "Mermas Reales", Width = 120 },
+          new Column { Bind = "CodigoArticulo", Header = "Codigo Articulo", Width = 120 },
+
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

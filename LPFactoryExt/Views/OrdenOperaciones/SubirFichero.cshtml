@@ -1,0 +1,79 @@
+﻿@model LPFactory.Models.ImportacionFicheroOperacionesViewModel
+
+@{
+    ViewData["Title"] = "Subir fichero";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <h4>Subir fichero de actualizaci&oacute;n</h4>
+        <br />
+        <form enctype="multipart/form-data" method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="AltaArticulos" /> @Html.DisplayNameFor(model => model.AltaArticulos)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="ActualizarArticulosExistentes" /> @Html.DisplayNameFor(model => model.ActualizarArticulosExistentes)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="GenerarOrdenes" /> @Html.DisplayNameFor(model => model.GenerarOrdenes)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="LanzarOrdenesGeneradas" /> @Html.DisplayNameFor(model => model.LanzarOrdenesGeneradas)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="DuplicarOrdenesExistentes" /> @Html.DisplayNameFor(model => model.DuplicarOrdenesExistentes)
+                        </label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label" for="defaultFile">Seleccionar fichero</label>
+                        <input type="file" name="files" class="form-control" id="defaultFile" />
+                    </div>
+                    <div class="form-group mb-4">
+                        <input type="submit" class="btn btn-primary" value="Subir" />
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <a asp-action="Index">Volver</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#LanzarOrdenesGeneradas').attr('disabled', true);
+            $('#DuplicarOrdenesExistentes').attr('disabled', true);
+            $("input[type='checkbox']").prop('checked', false);
+
+            $('#GenerarOrdenes').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#LanzarOrdenesGeneradas').attr('disabled', false);
+                    $('#DuplicarOrdenesExistentes').attr('disabled', false);
+                } else {
+                    $('#LanzarOrdenesGeneradas').prop('checked', false);
+                    $('#DuplicarOrdenesExistentes').prop('checked', false);
+                    $('#LanzarOrdenesGeneradas').attr('disabled', true);
+                    $('#DuplicarOrdenesExistentes').attr('disabled', true);
+                }
+            });
+        });
+    </script>
+}

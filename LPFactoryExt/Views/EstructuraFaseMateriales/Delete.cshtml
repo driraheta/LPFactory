@@ -1,0 +1,36 @@
+﻿@model LPFactory.Data.EstructuraFaseMaterial
+
+@{
+    ViewData["Title"] = "Borrar";
+}
+
+<h3>¿Está seguro de borrar?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EstructuraFase)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EstructuraFase.Fase.CodigoYDescripcion)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Articulo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Articulo.CodigoYDescripcion)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cantidad)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Borrar" class="btn btn-danger" /> |
+        <a href="/EstructuraFases/Details/@Model.EstructuraFaseId">Volver</a>
+    </form>
+</div>

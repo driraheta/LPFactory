@@ -1,0 +1,45 @@
+﻿@model IEnumerable<LPFactory.Data.EstructuraFase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<ol class="breadcrumb p-3 bg-light rounded">
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Estructuras">Estructuras</a></li>
+    <li class="breadcrumb-item active">@ViewBag.NombreArticulo (@ViewBag.Version)</li>
+</ol>
+
+<br />
+
+<div class="card">
+    <div class="card-body">
+        <h4>Fases</h4>
+        <p>
+            <a asp-action="Create" asp-route-id="@ViewBag.EstructuraId">Crear nueva fase</a>
+        </p>
+        <table class="table table-sm table-borderless">
+            <tr class="table-active">
+                <td>@Html.DisplayNameFor(model => model.Fase)</td>
+                <td></td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="Light">
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Fase.CodigoYDescripcion)</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <a asp-action="Index" asp-controller="Estructuras">Volver a Estructuras</a>
+</div>

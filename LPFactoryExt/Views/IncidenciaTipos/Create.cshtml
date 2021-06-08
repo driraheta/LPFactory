@@ -1,0 +1,9 @@
+﻿@model LPFactory.Data.IncidenciaTipo
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.Activo)
+    }
+}

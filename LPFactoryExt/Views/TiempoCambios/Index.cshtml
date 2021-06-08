@@ -1,0 +1,50 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tiempos de cambio</h1>
+
+<p>
+    <a asp-action="SubirFichero">Subir fichero de movimientos</a>
+</p>
+
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "TiempoCambios")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Argumento.Nombre", ClientFormat = ".(Argumento)", Header = "Argumento" }
+            .Mod(o => o.Filter(valProp: "Argumento")),
+
+          new Column { Bind = "ValorActual.Nombre", ClientFormat = ".(ValorActual)", Header = "Valor Actual" }
+            .Mod(o => o.Filter(valProp: "ValorActual")),
+
+          new Column { Bind = "ValorSiguiente.Nombre", ClientFormat = ".(ValorSiguiente)", Header = "Valor Siguiente" }
+            .Mod(o => o.Filter(valProp: "ValorSiguiente")),
+
+          new Column { Bind = "Tiempo", Width = 90 },
+
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

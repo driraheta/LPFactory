@@ -1,0 +1,65 @@
+﻿@model IEnumerable<LPFactory.Data.EstructuraFaseOperacion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstructuraFase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Maquina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoPreparacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TiempoProduccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MermasTeoricas)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empresa.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstructuraFase.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Maquina.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoPreparacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TiempoProduccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MermasTeoricas)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

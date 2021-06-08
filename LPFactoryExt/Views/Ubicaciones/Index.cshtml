@@ -1,0 +1,44 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Ubicaciones";
+}
+
+<h1>Ubicaciones</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Ubicaciones")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Descripcion", Header = "Descripción" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Descripcion").ClearButton())),
+          new Column { Bind = "X", Header = "X" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("X").ClearButton())),
+          new Column { Bind = "Y", Header = "Y" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Y").ClearButton())),
+          new Column { Bind = "Z", Header = "Z" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Z").ClearButton())),
+          new Column { Bind = "Almacen.CodigoYDescripcion", ClientFormat = ".(Almacen)", Header = "Almacen" }
+            .Mod(o => o.Filter(valProp: "Almacen")),
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

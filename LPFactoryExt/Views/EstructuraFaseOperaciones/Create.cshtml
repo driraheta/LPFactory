@@ -1,0 +1,58 @@
+﻿@model LPFactory.Data.EstructuraFaseOperacion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<ol class="breadcrumb p-3 bg-light rounded">
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Estructuras">Estructuras</a></li>
+    <li class="breadcrumb-item"><a href="/EstructuraFases/Index/@Model.EstructuraFase.Estructura.Id">@Model.EstructuraFase.Estructura.Articulo.CodigoYDescripcion (@Model.EstructuraFase.Estructura.Version)</a></li>
+    <li class="breadcrumb-item"><a href="/EstructuraFases/Details/@Model.EstructuraFase.Fase.Id">Fase @Model.EstructuraFase.Fase.CodigoYDescripcion</a></li>
+    <li class="breadcrumb-item active">Agregar operaci&oacute;n</li>
+</ol>
+
+<h4>Agregar operaci&oacute;n a fase de estructura</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EmpresaId" value="@ViewBag.EmpresaId" />
+            <input type="hidden" asp-for="EstructuraFaseId" value="@ViewBag.EstructuraFaseId" />
+            <div class="form-group">
+                <label asp-for="OperacionId" class="control-label"></label>
+                <select asp-for="OperacionId" class ="form-control" asp-items="ViewBag.OperacionId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaquinaId" class="control-label"></label>
+                <select asp-for="MaquinaId" class ="form-control" asp-items="ViewBag.MaquinaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoPreparacion" class="control-label"></label>
+                <input asp-for="TiempoPreparacion" class="form-control" />
+                <span asp-validation-for="TiempoPreparacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TiempoProduccion" class="control-label"></label>
+                <input asp-for="TiempoProduccion" class="form-control" />
+                <span asp-validation-for="TiempoProduccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MermasTeoricas" class="control-label"></label>
+                <input asp-for="MermasTeoricas" class="form-control" />
+                <span asp-validation-for="MermasTeoricas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="/EstructuraFases/Details/@ViewBag.EstructuraFaseId">Volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

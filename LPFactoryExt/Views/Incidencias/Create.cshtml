@@ -1,0 +1,19 @@
+﻿@model LPFactory.Data.Incidencia
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.OrdenId)
+        @Html.EditorFor(o => o.SeccionId)
+        @Html.EditorFor(o => o.FaseId)
+        @Html.EditorFor(o => o.OperacionId)
+        @Html.EditorFor(o => o.MaquinaId)
+        @Html.EditorFor(o => o.Secuencia)
+        @Html.EditorFor(o => o.NumeroLinea)
+        @Html.EditorFor(o => o.ArticuloId)
+        @Html.EditorFor(o => o.IncidenciaTipoId)
+        @Html.EditorFor(o => o.Tiempo)
+        @Html.EditorFor(o => o.Observaciones)
+        @Html.EditorFor(o => o.Fecha)
+    }
+}

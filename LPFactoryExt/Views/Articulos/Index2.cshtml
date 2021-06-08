@@ -1,0 +1,268 @@
+﻿@model IEnumerable<LPFactory.Data.Articulo>
+
+@{
+    ViewData["Title"] = "Artículos";
+    SelectList lstTipos = (SelectList)ViewData["Tipos"];
+    SelectList lstFamilias = (SelectList)ViewData["Familias"];
+}
+@section Styles{
+    <link href="~/lib/datatables.net-bs4/css/dataTables.bootstrap4.css" type="text/css" />
+    <link href="~/lib/datatables.net-responsive-bs4/css/responsive.bootstrap4.css" type="text/css" />
+    <style>
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            float: none;
+            text-align: center;
+        }
+
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+            text-align: right;
+            visibility: hidden;
+        }
+    </style>
+}
+<h1>Artículos</h1>
+
+<p>
+    <a asp-action="Create">Nuevo</a>
+</p>
+
+<div class="box-body center-block">
+    <form id="frm_filter" style="display:flex;">
+        <div class="form-group">
+            <input type="text" class="form-control filtro" placeholder="Código" id="frm_codigo" name="frm_codigo" style="width: 100px;" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control filtro" placeholder="Descripción" id="frm_desc" name="frm_desc" />
+        </div>
+        <div class="form-group">
+            <select class="form-control filtro_sel" id="frm_tipo" name="frm_tipo" asp-items="lstTipos">
+                <option value="">Tipo</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control filtro_sel" id="frm_familia" name="frm_familia" asp-items="lstFamilias">
+                <option value="">Familia</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control filtro" id="frm_lote" name="frm_lote" placeholder="Lote" style="width: 100px;" />
+        </div>
+        <div style="margin-left:5%;">
+            @*<button type="button" class="btn btn-default" id="buscar"><i class="fa fa-search"></i></button>*@
+            <a onclick="resetState();" role="button" asp-action="Index" class="btn btn-default"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </form>
+</div>
+
+<table class="table table-sm nowrap" id="example" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Referencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Actividad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Familia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ubicacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Referencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Actividad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Activo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Familia.CodigoYDescripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ubicacion.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lote)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts{
+    <script src="~/lib/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="~/lib/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/lib/datatables.net-responsive/js/dataTables.responsive.js"></script>
+    <script src="~/lib/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+    <script>
+
+        function resetState() {
+            //table.state.clear();
+            localStorage.removeItem('DataTables_example_/Articulos')
+        }
+
+
+        $(document).ready(function () {
+
+            //verify localstorage
+            if (localStorage.getItem('DataTables_example_/Articulos') != null) {
+                let data = JSON.parse(localStorage.getItem('DataTables_example_/Articulos'));
+
+                if (data.columns != undefined) {
+                    if (data.columns[0].search.search != "") {
+                        $("#frm_codigo").val(data.columns[0].search.search);
+                    }
+                    if (data.columns[2].search.search != "") {
+                        $("#frm_desc").val(data.columns[2].search.search);
+                    }
+                    if (data.columns[5].search.search != "") {
+                        $("#frm_tipo").val(data.columns[5].search.search);
+                    }
+                    if (data.columns[6].search.search != "") {
+                        $("#frm_familia").val(data.columns[6].search.search);
+                    }
+                    if (data.columns[8].search.search != "") {
+                        $("#frm_lote").val(data.columns[8].search.search);
+                    }
+                }
+            }
+
+
+            //define table
+            var table = $('#example').DataTable({
+                //ordering: true,
+                info: false,
+                searching: true,
+                pagingType: "numbers",
+                stateSave: true,
+                lengthMenu: [
+                    [5, 10, 25, -1],
+                    ['5', '10', '25', 'All']
+                ],
+                buttons: [
+                    'pageLength'
+                ],
+                columnDefs: [
+                    { orderable: true, targets: 0 },
+                    { orderable: false, targets: 1 },
+                    { orderable: true, targets: 2 },
+                    { orderable: false, targets: 3 },
+                    { orderable: false, targets: 4 },
+                    { orderable: false, targets: 5 },
+                    { orderable: false, targets: 6 },
+                    { orderable: false, targets: 7 },
+                    { orderable: false, targets: 8 },
+                    { orderable: false, targets: 9 },
+                    { orderable: false, targets: 10 },
+                ]
+            });
+
+
+
+            $(".filtro_sel").on("change", function () {
+                let tipo = $("#frm_tipo option:selected").val();
+                let familia = $("#frm_familia option:selected").val();
+                let identifier = $(this).attr("id");
+
+                let _tipo = tipo != null && tipo != "" ? true : false;
+                let _familia = familia != null && familia != "" ? true : false;
+
+                if (!_tipo && !_familia) {
+                    table.column(5).search("").draw();
+                    table.column(6).search("").draw();
+                }
+
+                if (_tipo) {
+                    table.column(5).search(tipo).draw();
+                }
+                if (_familia) {
+                    table.column(6).search(familia).draw();
+                }
+
+                if (_tipo && !_familia) {
+                    table.column(5).search(tipo).draw();
+                    table.column(6).search("").draw();
+                } else if (!_tipo && _familia) {
+                    table.column(5).search("").draw();
+                    table.column(6).search(familia).draw();
+                } else if (_tipo && _familia) {
+                    table.column(5).search(tipo).draw();
+                    table.column(6).search(familia).draw();
+                }
+            });
+
+
+            $(".filtro", this).on("keyup change", function () {
+                var code = $("#frm_codigo").val();
+                var desc = $("#frm_desc").val();
+                var lote = $("#frm_lote").val();
+
+                if ((code == null || code == "") && (desc == null || desc == "") && (lote == null || lote == "")) {
+                    table.column(0).search("").draw();
+                    table.column(2).search("").draw();
+                    table.column(8).search("").draw();
+                }
+
+                if (code != null && code != "" && table.column(0).search() !== code) {
+                    table.column(0).search(code).draw();
+                }
+                if (desc != null && desc != "" && table.column(2).search() !== desc) {
+                    table.column(2).search(desc).draw();
+                }
+                if (lote != null && lote != "" && table.column(8).search() !== lote) {
+                    table.column(8).search(lote).draw();
+                }
+            });
+
+        });
+    </script>
+}

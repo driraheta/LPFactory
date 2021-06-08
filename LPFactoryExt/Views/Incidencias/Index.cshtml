@@ -1,0 +1,70 @@
+﻿@using LPFactory.Utils
+
+@{
+    ViewData["Title"] = "Incidencias";
+}
+
+<h1>Incidencias</h1>
+
+@using (Html.Awe().BeginContext())
+{
+    var gridId = "Grid";
+
+    @Html.InitCrudPopupsForGrid(gridId, "Incidencias")
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(gridId)
+    </div>
+
+    @(Html.Awe().Grid(gridId)
+      .Mod(o => o.Main().FilterRow())
+      .Url(Url.Action("GetItemsFiltered"))
+      .Height(700)
+      .Reorderable()
+      .Resizable()
+      .Groupable(false)
+      .Columns(
+          new Column { Bind = "Orden.CodigoYDescripcion", Header = "Órden" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Orden").ClearButton())),
+
+          new Column { Bind = "Seccion.CodigoYDescripcion", Header = "Sección" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Seccion").ClearButton())),
+
+          new Column { Bind = "Fase.CodigoYDescripcion", Header = "Fase" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Fase").ClearButton())),
+
+          new Column { Bind = "Operacion.CodigoYDescripcion", Header = "Operacion" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Operacion").ClearButton())),
+
+          new Column { Bind = "Maquina.CodigoYDescripcion", Header = "Maquina" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Maquina").ClearButton())),
+
+          new Column { Bind = "Secuencia", Header = "Secuencia" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Secuencia").ClearButton())),
+
+          new Column { Bind = "NumeroLinea", Header = "Numero Linea" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("NumeroLinea").ClearButton())),
+
+          new Column { Bind = "Articulo.CodigoYDescripcion", Header = "Articulo" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Articulo").ClearButton())),
+
+          new Column { Bind = "IncidenciaTipo.Descripcion", Header = "Tipo Incidencia" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("IncidenciaTipo").ClearButton())),
+
+          new Column { Bind = "Tiempo", Header = "Tiempo" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Tiempo").ClearButton())),
+
+          new Column { Bind = "Observaciones", Header = "Observaciones" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Observaciones").ClearButton())),
+
+          new Column { Bind = "Fecha", Header = "Fecha" }
+            .Mod(o => o.Filter(Html.Awe().TextBox("Fecha").ClearButton())),
+
+          new Column { ClientFormat = Html.EditFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide()),
+          new Column { ClientFormat = Html.DeleteFormatForGrid(gridId), Width = 55 }.Mod(o => o.Nohide())
+        )
+
+    )
+
+
+}

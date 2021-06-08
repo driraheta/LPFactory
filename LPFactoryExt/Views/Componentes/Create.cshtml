@@ -1,0 +1,19 @@
+﻿@model LPFactory.Data.Articulo
+
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.Activo)
+        @Html.EditorFor(o => o.Actividad)
+        @Html.EditorFor(o => o.ArticuloFamiliaId)
+        @Html.EditorFor(o => o.ArticuloTipoId)
+        @Html.EditorFor(o => o.UbicacionId)
+        @Html.EditorFor(o => o.Lote)
+        @Html.EditorFor(o => o.Stock)
+        @Html.EditorFor(o => o.Referencia)
+        @Html.EditorFor(o => o.CodigoBarras)
+    }
+}

@@ -1,0 +1,12 @@
+﻿@model LPFactory.Data.Linea
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Nombre)
+        @Html.EditorFor(o => o.Activo)
+        @Html.EditorFor(o => o.PlantaId)
+        @Html.EditorFor(o => o.SeccionId)
+    }
+}

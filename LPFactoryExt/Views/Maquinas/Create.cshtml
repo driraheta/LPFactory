@@ -1,0 +1,17 @@
+﻿@model LPFactory.Data.Maquina
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(o => o.Codigo)
+        @Html.EditorFor(o => o.Descripcion)
+        @Html.EditorFor(o => o.Modelo)
+        @Html.EditorFor(o => o.NumeroSerie)
+        @Html.EditorFor(o => o.AnioFabricacion)
+        @Html.EditorFor(o => o.Version)
+        @Html.EditorFor(o => o.Actividad)
+        @Html.EditorFor(o => o.Activo)
+        @Html.EditorFor(o => o.SeccionId)
+        @Html.EditorFor(o => o.LineaId)
+    }
+}

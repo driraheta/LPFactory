@@ -1,0 +1,81 @@
+﻿@model LPFactory.Data.EstructuraFase
+
+@{
+    ViewData["Title"] = "Detalle de estructura";
+}
+
+<ol class="breadcrumb p-3 bg-light rounded">
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Estructuras">Estructuras</a></li>
+    <li class="breadcrumb-item"><a href="/EstructuraFases/Index/@Model.Estructura.Id">@Model.Estructura.Articulo.CodigoYDescripcion (@Model.Estructura.Version)</a></li>
+    <li class="breadcrumb-item active">Fase @Model.Fase.CodigoYDescripcion</li>
+</ol>
+
+<br />
+
+<div class="card">
+    <div class="card-body">
+        <h4>Materiales</h4>
+        <p>
+            <a asp-action="Create" asp-controller="EstructuraFaseMateriales" asp-route-id="@Model.Id">Agregar material</a>
+        </p>
+        <table class="table table-sm table-borderless">
+            <tr class="table-active">
+                <td>Art&iacute;culo</td>
+                <td>Cantidad</td>
+                <td></td>
+            </tr>
+            @foreach (var item in Model.Materiales.OrderBy(x => x.Articulo.CodigoYDescripcion))
+            {
+                <tr class="Light">
+                    <td>@item.Articulo.CodigoYDescripcion</td>
+                    <td class="text-right">@item.Cantidad</td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-controller="EstructuraFaseMateriales" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Delete" asp-controller="EstructuraFaseMateriales" asp-route-id="@item.Id">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<br />
+
+<div class="card">
+    <div class="card-body">
+        <h4>Operaciones</h4>
+        <p>
+            <a asp-action="Create" asp-controller="EstructuraFaseOperaciones" asp-route-id="@Model.Id">Agregar operaci&oacute;n</a>
+        </p>
+        <table class="table table-sm table-borderless">
+            <tr class="table-active">
+                <td>Operaci&oacute;n</td>
+                <td>M&aacute;quina</td>
+                <td>Tº Prep.</td>
+                <td>Tº Prod.</td>
+                <td>Mermas</td>
+                <td></td>
+            </tr>
+            @foreach (var item in Model.Operaciones.OrderBy(x => x.Operacion.CodigoYDescripcion))
+            {
+                <tr class="Light">
+                    <td>@item.Operacion.CodigoYDescripcion</td>
+                    <td>@item.Maquina.CodigoYDescripcion</td>
+                    <td class="text-right">@item.TiempoPreparacion</td>
+                    <td class="text-right">@item.TiempoProduccion</td>
+                    <td class="text-right">@item.MermasTeoricas</td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-controller="EstructuraFaseOperaciones" asp-route-id="@item.Id">Editar</a> |
+                        <a asp-action="Delete" asp-controller="EstructuraFaseOperaciones" asp-route-id="@item.Id">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <a href="/EstructuraFases/Index/@Model.Estructura.Id">Volver</a>
+</div>
